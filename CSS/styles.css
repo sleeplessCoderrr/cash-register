@@ -28,7 +28,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    height: 1000px;
 }
 
 #container .top{
@@ -110,7 +110,7 @@ body{
 
 #container .cashplace .box{
     height: 20px;
-    width: 40px;
+    width: 60px;
     background-color: var(--content);
     margin-right: 60px;
 }
@@ -118,13 +118,65 @@ body{
 #container .cashplace .cashier{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    width: 400px;
+    background-color: var(--content);
+    padding: 10px;
+    border-radius: 50px 50px 0px 0px;
 }
 
-.cashplace .cashier #grid{
+.cashplace .cashier #grid {
     display: grid;
-    grid-template-columns:  repeat(1, 1fr);
-    gap: 2px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
     padding: 10px;
+    background-color: var(--dark);
+    border-radius: 10px;
+}
+
+.grid-item {
+    background-color: var(--content);
+    color: var(--dimmedLight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.cashplace .cashier #change{
+    margin-left: 60px;
+    background-color: var(--gray);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.cashplace .cashier #change h3{
+    margin: 10px 0px;
+    font-size: 18px;
+}
+
+.cashplace .cashier #change p{
+    font-size: 18px;
+    margin: 5px 0px;
+}
+
+#container .bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 419.97px;
+    height: 60px;
+    background-color: var(--content);
+}
+
+#container .bottom .circle{
+    height: 20px;
+    width: 20px;
+    background-color: var(--dark);
+    border-radius: 20px;
 }
