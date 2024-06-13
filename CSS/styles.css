@@ -148,7 +148,7 @@ body{
 
 .cashplace .cashier #change{
     margin-left: 60px;
-    background-color: var(--gray);
+    background-color: var(--dark);
     padding: 10px;
     border-radius: 10px;
 }
@@ -156,11 +156,13 @@ body{
 .cashplace .cashier #change h3{
     margin: 10px 0px;
     font-size: 18px;
+    color: var(--dimmedLight);
 }
 
 .cashplace .cashier #change p{
     font-size: 18px;
     margin: 5px 0px;
+    color: var(--dimmedLight);
 }
 
 #container .bottom{
