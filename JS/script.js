@@ -11,15 +11,15 @@ let cashier = [
 ]; 
 
 let change = [
-    ['PENNIES', 0],
-    ['NICKELS', 0],
-    ['DIMES', 0],
-    ['QUARTERS', 0],
-    ['ONES', 0],
-    ['FIVES', 0],
-    ['TENS', 0],
+    ['HUNDREDS', 0],
     ['TWENTIES', 0],
-    ['HUNDREDS', 0]
+    ['TENS', 0],
+    ['FIVES', 0],
+    ['ONES', 0],
+    ['QUARTERS', 0],
+    ['DIMES', 0],
+    ['NICKELS', 0],
+    ['PENNIES', 0]
 ];
 
 printCashier(cashier);
@@ -53,6 +53,7 @@ document.querySelector("#purchase-btn").addEventListener("click", function(){
     let changeMoney = userMoney - priceMoney;
     let cashierMoney = cashier.reduce((sum, item) => sum + item[1], 0);
     cashierMoney = cashierMoney - changeMoney;
+    console.log(cashierMoney);
 
     if(cashierMoney < 0){
         printResultScreen(0);
@@ -61,21 +62,22 @@ document.querySelector("#purchase-btn").addEventListener("click", function(){
 
     while(changeMoney > 0){
         if(changeMoney > 100 && cashier[8][1] > 0){
-            change[8][1] += 100;
+            change[0][1] += 100;
             cashier[8][1] -= 100;
             changeMoney -= 100;
-        }else if(changeMoney > 20 && cashier[7][1] > 0){
-            change[7][1] += 20;
+        }
+        else if(changeMoney > 20 && cashier[7][1] > 0){
+            change[1][1] += 20;
             cashier[7][1] -= 20;
             changeMoney -= 20;
         }
         else if(changeMoney > 10 && cashier[6][1] > 0){
-            change[6][1] += 10;
+            change[2][1] += 10;
             cashier[6][1] -= 10;
             changeMoney -= 10;
         }
         else if(changeMoney > 5 && cashier[5][1] > 0){
-            change[5][1] += 5;
+            change[3][1] += 5;
             cashier[5][1] -= 5;
             changeMoney -= 5;
         }
@@ -85,22 +87,22 @@ document.querySelector("#purchase-btn").addEventListener("click", function(){
             changeMoney -= 1;
         }
         else if(changeMoney > 0.25 && cashier[3][1] > 0){
-            change[3][1] += 0.25;
+            change[5][1] += 0.25;
             cashier[3][1] -= 0.25;
             changeMoney -= 0.25;
         }
         else if(changeMoney > 0.1 && cashier[2][1] > 0){
-            change[2][1] += 0.1;
+            change[6][1] += 0.1;
             cashier[2][1] -= 0.1;
             changeMoney -= 0.1;
         }
         else if(changeMoney > 0.05 && cashier[1][1] > 0){
-            change[1][1] += 0.05;
+            change[7][1] += 0.05;
             cashier[1][1] -= 0.05;
             changeMoney -= 0.05;
         }
         else if(changeMoney > 0.01 && cashier[0][1] > 0){
-            change[0][1] += 0.01;
+            change[8][1] += 0.01;
             cashier[0][1] -= 0.01;
             changeMoney -= 0.01;
         }
@@ -116,6 +118,8 @@ document.querySelector("#purchase-btn").addEventListener("click", function(){
         printResultScreen(2);
         return;
     }
+
+    printCashier(cashier);
     return;
 });
 
@@ -123,7 +127,7 @@ document.querySelector("#purchase-btn").addEventListener("click", function(){
 //Function to print the result screen
 function printResultScreen(type){
     const resultScreen = document.querySelector("#result-screen");
-    let result = cashier.filter(item => item[1] > 0);
+    let result = change.filter(item => item[1] > 0);
 
     const status = document.createElement("p");
     if(type === 0) status.textContent = "Status: INSUFFICIENT_FUNDS";
@@ -136,13 +140,14 @@ function printResultScreen(type){
         resultConatiner.classList.add("result-container");
 
         const resultType = document.createElement("p");
-        resultType.textContent = item[0];
+        resultType.textContent = item[0] + ":";
 
         const resultAmount = document.createElement("p");
-        resultAmount.textContent = item[1];
+        resultAmount.textContent = "$" + item[1];
 
         resultConatiner.appendChild(resultType);
         resultConatiner.appendChild(resultAmount);
         resultScreen.appendChild(resultConatiner);
     }));
+    printCashier(cashier);
 }
