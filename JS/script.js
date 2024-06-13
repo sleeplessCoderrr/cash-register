@@ -50,19 +50,78 @@ function printCashier(cashier){
 document.querySelector("#purchase-btn").addEventListener("click", function(){
     const userMoney = parseInt(document.querySelector("#user-input").value);
     const priceMoney = 3.26;
+    let changeMoney = userMoney - priceMoney;
     let cashierMoney = cashier.reduce((sum, item) => sum + item[1], 0);
-    const changeMoney = userMoney - priceMoney;
+    cashierMoney = cashierMoney - changeMoney;
 
-    if (isNaN(userMoney) || userMoney < priceMoney) {
-        alert("Insufficient funds. Please enter enough money.");
+    if(cashierMoney < 0){
+        printResultScreen(0);
+        return;
+    } 
+
+    while(changeMoney > 0){
+        if(changeMoney > 100 && cashier[8][1] > 0){
+            change[8][1] += 100;
+            cashier[8][1] -= 100;
+            changeMoney -= 100;
+        }else if(changeMoney > 20 && cashier[7][1] > 0){
+            change[7][1] += 20;
+            cashier[7][1] -= 20;
+            changeMoney -= 20;
+        }
+        else if(changeMoney > 10 && cashier[6][1] > 0){
+            change[6][1] += 10;
+            cashier[6][1] -= 10;
+            changeMoney -= 10;
+        }
+        else if(changeMoney > 5 && cashier[5][1] > 0){
+            change[5][1] += 5;
+            cashier[5][1] -= 5;
+            changeMoney -= 5;
+        }
+        else if(changeMoney > 1 && cashier[4][1] > 0){
+            change[4][1] += 1;
+            cashier[4][1] -= 1;
+            changeMoney -= 1;
+        }
+        else if(changeMoney > 0.25 && cashier[3][1] > 0){
+            change[3][1] += 0.25;
+            cashier[3][1] -= 0.25;
+            changeMoney -= 0.25;
+        }
+        else if(changeMoney > 0.1 && cashier[2][1] > 0){
+            change[2][1] += 0.1;
+            cashier[2][1] -= 0.1;
+            changeMoney -= 0.1;
+        }
+        else if(changeMoney > 0.05 && cashier[1][1] > 0){
+            change[1][1] += 0.05;
+            cashier[1][1] -= 0.05;
+            changeMoney -= 0.05;
+        }
+        else if(changeMoney > 0.01 && cashier[0][1] > 0){
+            change[0][1] += 0.01;
+            cashier[0][1] -= 0.01;
+            changeMoney -= 0.01;
+        }
+        else{
+            break;
+        }
+    }
+
+    if(cashierMoney === 0){
+        printResultScreen(1);
+        return;
+    } else if(cashierMoney > 0){
+        printResultScreen(2);
         return;
     }
-    alert("Your change is: $" + changeMoney.toFixed(2));
+    return;
 });
 
 
 //Function to print the result screen
-function printResultScreen(changeMoney, type){
+function printResultScreen(type){
     const resultScreen = document.querySelector("#result-screen");
     let result = cashier.filter(item => item[1] > 0);
 
