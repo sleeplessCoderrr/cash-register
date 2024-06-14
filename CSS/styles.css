@@ -186,9 +186,14 @@ body{
 #container #result-screen{
     background-color: var(--content);
     border-radius: 10px;
-    padding: 5px 92px;
+    padding: 10px 92px;
     margin-bottom: 24px;
     color: var(--dimmedLight);
+}
+
+#container #result-screen h3 {
+    margin: 5px 0px;
+    font-weight: 600;
 }
 
 #container .result-container p{
